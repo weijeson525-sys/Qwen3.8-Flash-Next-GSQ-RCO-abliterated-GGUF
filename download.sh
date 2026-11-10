@@ -68,6 +68,12 @@ download_mmproj() {
   echo "Done: mmproj downloaded and verified."
 }
 
+# Reject unexpected extra arguments: a stray extra arg must never start a download.
+if [ "$#" -gt 1 ]; then
+  echo "ERROR: too many arguments (expected at most 1). Usage: ./download.sh [QUANT|--list|--mmproj|--help]" >&2
+  exit 1
+fi
+
 case "${1:-Q2_0}" in
   --list|-l) list_quants ;;
   --mmproj) download_mmproj ;;
